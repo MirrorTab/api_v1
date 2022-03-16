@@ -1,0 +1,155 @@
+openapi: 3.0.2
+info:
+  title: MirrorTab API
+  version: 1.0.0
+  description: MirrorTab API
+  contact:
+    email: api@mirrortab.com
+    name: Support
+servers:
+  - url: 'https://api.mirrortab.com/'
+paths:
+  /new_session:
+    post:
+      summary: New Session
+      description: "This creates a new MirrorTab session and returns a URL to allow users to join"
+      operationId: new_session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                api_key:
+                  type: string
+                  example: 333c5322babf799edc1efdea4a
+                  description: api_key
+                session_name:
+                  type: string
+                  example: My first MirrorTab session
+                  description: String for the session name - this is optional 
+                permissions:
+                  type: string
+                  example: open
+                  description: '* open - this allows anyone with the url to join the MirrorTab session
+ * gocode - the MirrorTab api will generate a gocode allowing anyone with this code to join - (default)
+ * account - this requires all users of the session to have a MirrorTab account to join the session'
+                  default: open
+                duration_min:
+                  type: integer
+                  example: 30
+                  description: 'duration_min is the time in minutes before the session get removed - default is 45 mins'
+                  default: 45
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    example: ['https://hackernews.com','https://silvershots.com']
+                  description: 'This is optional argument opens an array of URLs in the MirrorTab session'
+              required:
+                - api_key
+                - permissions
+                - duration_min
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_id:
+                    type: string
+                    example: rtbvdenadtz0is0rg2f16lzvdazyx1
+                  session_name:
+                    type: string
+                    example: My first MirrorTab session
+                  go_url:
+                    type: string
+                    example: https://mirrortab.com/go/rtbvdenadtz0is0rg2f16lzvdazyx1
+                  gocode:
+                    type: string
+                    example: Ilikepurplecars
+                  kill_time:
+                    type: string
+                    example: unix_datetime
+      tags:
+        - SESSION
+  /list_sessions:
+    post:
+      summary: List sessions
+      description: "This list all new MirrorTab sessions assigned to given api_key"
+      operationId: list_sessions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                api_key:
+                  type: string
+                  example: 333c5322babf799edc1efdea4a
+                  description: api_key
+              required:
+                - api_key
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rtbvdenadtz0is0rg2f16lzvdazyx1:
+                    type: object
+                    properties:
+                      session_name:
+                        type: string
+                        example: My first MirrorTab Session
+                      go_url:
+                        type: string
+                        example: https://mirrortab.com/go/rtbvdenadtz0is0rg2f16lzvdazyx1
+                      kill_time_UTC:
+                        type: integer
+                        example: 1642101252956
+                      gocode:
+                        type: string
+                        example: cat-coffee-396
+      tags:
+        - LIST SESSIONS
+  
+  /remove_session:
+    post:
+      summary: Remove Session
+      description: "This removes a MirrorTab session given the session_id and api_key"
+      operationId: remove_session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                api_key:
+                  type: string
+                  example: 333c5322babf799edc1efdea4a
+                  description: api_key
+                session_id:
+                  type: string
+                  example: rtbvdenadtz0is0rg2f16lzvdazyx1
+                  description: the session id to remove
+              required:
+                - api_key
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  removed:
+                    type: boolean
+                    example: true
+      tags:
+        - REMOVE SESSION
+  
