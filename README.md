@@ -24,11 +24,11 @@ This creates a new MirrorTab session and returns a URL to allow users to join.
 
 ```json
 {
-    api_key:"[Your unique API Key]"
-    session_name:"[optional string for session name]",
-    permissions:"[permission level for this session - One of [open, gocode, account] - default is  gocode]"
-    duration_min:"[is the time in minutes before the session get removed - default is 45 mins]" 
-    urls: "[optional array of URLs - opens provided URLs in the MirrorTab session]" 
+    "api_key":"[Your unique API Key]",
+    "session_name":"[optional string for session name]",
+    "permissions":"[permission level for this session - One of [open, gocode, account] - default is  gocode]",
+    "duration_min":"[is the time in minutes before the session get removed - default is 45 mins]", 
+    "urls": "[optional array of URLs - opens provided URLs in the MirrorTab session]" 
 }
 ```
 
@@ -43,11 +43,11 @@ This creates a new MirrorTab session and returns a URL to allow users to join.
 
 ```json
 {
-    api_key:'333c5322babf799edc1efdea4a',
-    session_name:'My first MirrorTab session',
-    permissions:'open',
-    duration_min:'30'
-    urls:"['https://hackernews.com','https://silvershots.com']"
+    "api_key":"333c5322babf799edc1efdea4a",
+    "session_name":"My first MirrorTab session",
+    "permissions":"open",
+    "duration_min":"30",
+    "urls":"['https://hackernews.com','https://silvershots.com']"
 }
 ```
 
@@ -61,11 +61,11 @@ This creates a new MirrorTab session and returns a URL to allow users to join.
 
 ```json
 {
-  session_id: "rtbvdenadtz0is0rg2f16lzvdazyx1",
-  session_name: "My first MirrorTab session",
-  go_url: “https://mirrortab.com/go/rtbvdenadtz0is0rg2f16lzvdazyx1” ,
-  gocode: ”Ilikepurplecars” //public gocode to be used at https://MirrorTab.com
-  kill_time_UTC: "unix_datetime" 
+  "session_id": "rtbvdenadtz0is0rg2f16lzvdazyx1",
+  "session_name": "My first MirrorTab session",
+  "go_url": "https://mirrortab.com/go/rtbvdenadtz0is0rg2f16lzvdazyx1",
+  "gocode": "funpurplecars",
+  "kill_time_UTC": "unix_datetime" 
 }
 ```
 
@@ -104,7 +104,7 @@ This list all new MirrorTab sessions assigned to given api_key.
 
 ```json
 {
-    api_key:"[Your unique API Key]"
+    "api_key":"[Your unique API Key]"
 }
 ```
 
@@ -112,7 +112,7 @@ This list all new MirrorTab sessions assigned to given api_key.
 
 ```json
 {
-    api_key:'333c5322babf799edc1efdea4a',
+    "api_key":"333c5322babf799edc1efdea4a"
 }
 ```
 
@@ -176,8 +176,8 @@ This removes a MirrorTab session given the session_id and api_key.
 
 ```json
 {
-    api_key:"[Your unique API Key]",
-    session_id:"[session id to remove]"
+    "api_key":"[Your unique API Key]",
+    "session_id":"[session id to remove]"
 }
 ```
 
@@ -185,8 +185,8 @@ This removes a MirrorTab session given the session_id and api_key.
 
 ```json
 {
-    api_key:'333c5322babf799edc1efdea4a',
-    session_id:'rtbvdenadtz0is0rg2f16lzvdazyx1'
+    "api_key":"333c5322babf799edc1efdea4a",
+    "session_id":"rtbvdenadtz0is0rg2f16lzvdazyx1"
 }
 ```
 
@@ -199,7 +199,7 @@ This removes a MirrorTab session given the session_id and api_key.
 **Response Body**
 
 ```json
-{ removed: true }
+{ "removed": "true" }
 ```
 
 #### Error Responses
@@ -219,7 +219,7 @@ This removes a MirrorTab session given the session_id and api_key.
 
     ```json
     {
-        removed:false,
-        error_msg:"could not remove the session -e2"
+        "removed":"false",
+        "error_msg":"could not remove the session -e2"
     }
     ```
